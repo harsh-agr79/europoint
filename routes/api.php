@@ -1,0 +1,27 @@
+<?php
+
+use Illuminate\Http\Request;
+use App\Http\Middleware\ApiKeyMiddleware;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+
+Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
+->middleware(['signed', 'throttle:6,1'])
+->name('verification.verify');
+
+Route::middleware(ApiKeyMiddleware::class)->group(function () {
+    Route::post('/login', [AuthController::class, 'login']); //
+    Route::post('/register', [AuthController::class, 'register']); //
+
+    Route::post('/forgotpwd', [AuthController::class, 'sendResetLinkEmail']); //
+    Route::post('/resetpwd/validatecredentials', [AuthController::class, 'rp_validateCreds']); //
+    Route::post('/resetpwd/newpwd', [AuthController::class, 'set_newpass']); //
+
+    Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail'])
+    ->middleware(['auth:sanctum', 'throttle:6,1'])
+    ->name('verification.resend');
+});
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
