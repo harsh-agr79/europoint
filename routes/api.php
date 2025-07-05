@@ -20,8 +20,10 @@ Route::middleware(ApiKeyMiddleware::class)->group(function () {
     Route::post('/email/resend', [AuthController::class, 'resendVerificationEmail'])
     ->middleware(['auth:sanctum', 'throttle:6,1'])
     ->name('verification.resend');
+
+    Route::get('/user', function (Request $request) {
+            return $request->user();
+        })->middleware('auth:sanctum');
 });
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
