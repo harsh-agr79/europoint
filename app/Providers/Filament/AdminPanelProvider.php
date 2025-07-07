@@ -24,6 +24,10 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->brandLogo(asset('Logos/logo-circular-white.png'))
+            ->favicon(asset('Logos/logo-circular-white.png'))
+            ->font('Montserrat')
+            ->brandLogoHeight('3rem')
             ->id('admin')
             ->path('admin')
             ->login()
