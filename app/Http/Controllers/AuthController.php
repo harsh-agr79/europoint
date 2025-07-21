@@ -131,7 +131,7 @@ class AuthController extends Controller
         $token = Str::random( 60 );
 
         // Save token in password_resets table
-        \DB::table( 'customers' )->where( 'email', $request->email )->update(
+            Customer::where( 'email', $request->email )->update(
             [
                 'email_enc' => Hash::make( $user->email ),
                 'token_fp' => Hash::make( $token ),
