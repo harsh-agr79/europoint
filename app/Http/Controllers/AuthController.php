@@ -148,6 +148,8 @@ class AuthController extends Controller
                 Crypt::encryptString($user->email)
             ));
 
+            \Log::info('Password reset email triggered for '.$user->email);
+
             return response()->json('Email Has Been Sent', 200);
 
         } catch (\Exception $e) {
