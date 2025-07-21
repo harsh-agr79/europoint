@@ -110,40 +110,54 @@ class AuthController extends Controller
         return response()->json( [ 'error' => 'Unauthorized login' ], 401 );
     }
 
-    public function sendResetLinkEmail( Request $request ) {
+    public function sendResetLinkEmail(Request $request)
+    {
         // Validate email
-        $validator = Validator::make( $request->all(), [
+        $validator = Validator::make($request->all(), [
             'email' => 'required|email|exists:customers,email',
-        ] );
+        ]);
 
-        if ( RateLimiter::tooManyAttempts( 'password-reset:'.$request->ip(), 5 ) ) {
-            return response()->json( [ 'error' => 'Too many password reset attempts. Please try again later.' ], 429 );
+        if (RateLimiter::tooManyAttempts('password-reset:' . $request->ip(), 5)) {
+            return response()->json([
+                'error' => 'Too many password reset attempts. Please try again later.'
+            ], 429);
         }
 
-        if ( $validator->fails() ) {
-            return back()->withErrors( $validator )->withInput();
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
         }
 
-        // Find the user by email
-        $user = Customer::where( 'email', $request->email )->first();
+        try {
+            // Find the user by email
+            $user = Customer::where('email', $request->email)->first();
 
-        // Create a random token for resetting password
-        $token = Str::random( 60 );
+            // Create a random token for resetting password
+            $token = Str::random(60);
 
-        // Save token in password_resets table
-            Customer::where( 'email', $request->email )->update(
-            [
-                'email_enc' => Hash::make( $user->email ),
-                'token_fp' => Hash::make( $token ),
+            // Save token in password_resets table (you appear to be storing in customers table instead)
+            Customer::where('email', $request->email)->update([
+                'email_enc' => Hash::make($user->email),
+                'token_fp' => Hash::make($token),
                 'fp_at' => now()
-            ]
-        );
+            ]);
 
-        // Send reset password email
-        Mail::to( $user->email )->send( new ForgotPassword( $user, Crypt::encryptString( $token ), Crypt::encryptString( $user->email ) ) );
+            // Send reset password email
+            Mail::to($user->email)->send(new ForgotPassword(
+                $user,
+                Crypt::encryptString($token),
+                Crypt::encryptString($user->email)
+            ));
 
-        return response()->json( 'Email Has Been Sent', 200 );
+            return response()->json('Email Has Been Sent', 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to send reset email.',
+                'exception' => $e->getMessage()
+            ], 500);
+        }
     }
+
 
     public function rp_validateCreds( Request $request ) {
         $email = Crypt::decryptString( $request->email );
