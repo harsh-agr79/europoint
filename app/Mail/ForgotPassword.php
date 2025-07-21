@@ -33,7 +33,7 @@ class ForgotPassword extends Mailable
         $resetUrl = "https://europoint.vercel.app/reset-password/".$this->email."/".$this->token;
 
         return $this->subject('Europoint - Password Reset Request')
-                    ->markdown('emails.forgotpassword')
+                    ->view('emails.forgotpassword')
                     ->with([
                         // 'name' => $this->user->name,
                         'resetUrl' => $resetUrl,
