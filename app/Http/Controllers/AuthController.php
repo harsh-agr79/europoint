@@ -62,16 +62,16 @@ class AuthController extends Controller
         $customer = Customer::findOrFail( $id );
 
         if ( ! hash_equals( ( string ) $hash, sha1( $customer->getEmailForVerification() ) ) ) {
-            return redirect( 'https://europoint.vercel.app/sign-in?emailverified=Invalid_verification_link' );
+            return redirect( 'https://europoint.vercel.app/login?emailverified=Invalid_verification_link' );
         }
 
         if ( $customer->hasVerifiedEmail() ) {
-            return redirect( 'https://europoint.vercel.app/sign-in?emailverified=Email_already_verified' );
+            return redirect( 'https://europoint.vercel.app/login?emailverified=Email_already_verified' );
         }
 
         $customer->markEmailAsVerified();
 
-        return redirect( 'https://europoint.vercel.app/sign-in?emailverified=Email_Verified' );
+        return redirect( 'https://europoint.vercel.app/login?emailverified=Email_Verified' );
     }
 
     public function login( Request $request ) {

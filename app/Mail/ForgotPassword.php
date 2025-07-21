@@ -35,7 +35,7 @@ class ForgotPassword extends Mailable
         return $this->subject('Europoint - Password Reset Request')
                     ->markdown('emails.forgotpassword')
                     ->with([
-                        'name' => $this->user->name,
+                        // 'name' => $this->user->name,
                         'resetUrl' => $resetUrl,
                     ]);
     }
