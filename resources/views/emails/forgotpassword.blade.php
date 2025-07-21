@@ -1,40 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reset Password</title>
+    <title>Reset Your Europoint Password</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 30px 20px;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #fecd07;
+            color: #000000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #888888;
+            text-align: center;
+        }
+
+        .link {
+            color: #1a0dab;
+            word-break: break-word;
+        }
+
+        h2 {
+            color: #333333;
+        }
+    </style>
 </head>
 
-<body style="margin: 0; padding: 10px; background-color: #f3f3f3">
-    <a href="{{ $resetUrl }}"
-        style="
-													display: inline-block;
-													font-family: Arial, sans-serif;
-													font-size: 16px;
-													color: black;
-													text-decoration: none;
-													background-color: #fecd07;
-													padding: 12px 20px;
-													border-radius: 5px;
-													width: 100%;
-													max-width: 200px;
-													text-align: center;
-												">
-        Reset Password
-    </a>
+<body>
+    <div class="container">
+        <h2>Password Reset Request</h2>
+        <p>Hello,</p>
+        <p>We received a request to reset your Europoint account password. You can reset it by clicking the button below:</p>
 
-    <a href="{{ $resetUrl }}"
-        style="
-											color: blue;
-											word-break: break-all;
-											display: block;
-											max-width: 100%;
-											overflow-wrap: break-word;
-										">
-        {{ $resetUrl }}
-    </a>
+        <p style="text-align: center;">
+            <a href="{{ $resetUrl }}" class="btn">Reset Password</a>
+        </p>
+
+        <p>If the button above doesn't work, copy and paste the following link into your browser:</p>
+        <p class="link">{{ $resetUrl }}</p>
+
+        <p>If you didn’t request this, you can safely ignore this email — your password will not be changed.</p>
+
+        <div class="footer">
+            &copy; {{ date('Y') }} Europoint. All rights reserved.
+        </div>
+    </div>
 </body>
 
 </html>
