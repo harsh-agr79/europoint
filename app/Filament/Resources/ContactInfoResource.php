@@ -21,7 +21,7 @@ class ContactInfoResource extends Resource
 {
     protected static ?string $model = ContactInfo::class;
 
-      protected static ?string $navigationIcon = 'heroicon-o-phone';
+    protected static ?string $navigationIcon = 'heroicon-o-phone';
 
     protected static ?string $navigationGroup = "Contact";
 
