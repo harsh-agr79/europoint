@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ContactController;
 
+
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
 ->middleware(['signed', 'throttle:6,1'])
 ->name('verification.verify');
