@@ -40,6 +40,7 @@ class BlogController extends Controller
      public function show( $slug ) {
         $blog = Blog::where( 'slug', $slug )->firstOrFail();
         $blog->setRelation( 'recommended_posts', $blog->recommended_posts );
+        $blog->setRelation( 'tags', $blog->tags );
 
         return response()->json( $blog );
     }
