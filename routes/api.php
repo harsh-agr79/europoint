@@ -4,14 +4,23 @@ use Illuminate\Http\Request;
 use App\Http\Middleware\ApiKeyMiddleware;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
 ->middleware(['signed', 'throttle:6,1'])
 ->name('verification.verify');
 
+Route::get('/policy', [PolicyController::class, 'policy']);
+Route::get('/terms', [PolicyController::class, 'terms']);
+
+Route::get('/contact', [ContactController::class, 'showContactPage']);
+
 Route::middleware(ApiKeyMiddleware::class)->group(function () {
     Route::post('/login', [AuthController::class, 'login']); //
     Route::post('/register', [AuthController::class, 'register']); //
+
+    Route::post('/contact/message', [ContactController::class, 'storeContactMessage']);
 
     Route::post('/forgotpwd', [AuthController::class, 'sendResetLinkEmail']); //
     Route::post('/resetpwd/validatecredentials', [AuthController::class, 'rp_validateCreds']); //
