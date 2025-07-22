@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Blog;
 use App\Models\MetaTag;
+use App\Models\BlogTag;
 
 class BlogController extends Controller
 {
@@ -34,6 +35,7 @@ class BlogController extends Controller
             'meta_tags' => MetaTag::where('slug', 'blogs')->first(),
             'pinned' => $pinned,
             'blogs' => $blogs,
+            'tags' => BlogTag::all(),
         ] );
     }
 
