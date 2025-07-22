@@ -16,12 +16,14 @@ class Blog extends Model
         'cover_image',
         'recommendations',
         'is_pinned',
+        'blog_tags'
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
         'recommendations' => 'array',
         'is_pinned' => 'boolean',
+        'blog_tags' => 'array',
     ];
 
     protected static function booted(): void
@@ -38,9 +40,19 @@ class Blog extends Model
     public function getRecommendedPostsAttribute()
     {
         if (!$this->recommendations || !is_array($this->recommendations)) {
-            return collect(); // Return empty collection if null or invalid
+            return collect();
         }
 
         return Blog::whereIn('id', $this->recommendations)->get();
     }
+
+    public function getTagsAttribute()
+    {
+        if (!$this->blog_tags || !is_array($this->blog_tags)) {
+            return collect();
+        }
+
+        return BlogTag::whereIn('id', $this->blog_tags)->get();
+    }
+    
 }

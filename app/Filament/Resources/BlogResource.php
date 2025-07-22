@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BlogResource\Pages;
 use App\Filament\Resources\BlogResource\RelationManagers;
 use App\Models\Blog;
+use App\Models\BlogTag;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -86,6 +87,19 @@ class BlogResource extends Resource
             ->label( 'Recommended Posts' )
             ->options( Blog::all()->pluck( 'title', 'id' ) )
             ->preload(),
+           MultiSelect::make('blog_tags')
+            ->label('Blog Tags')
+            ->options(BlogTag::all()->pluck('name', 'id'))
+            ->preload()
+            ->createOptionForm([
+                Forms\Components\TextInput::make('name')
+                    ->required(),
+            ])
+            ->createOptionUsing(function (array $data) {
+                return BlogTag::create([
+                    'name' => $data['name'],
+                ])->id; // Return the ID so it can be selected
+            }),
             ]);
     }
 
