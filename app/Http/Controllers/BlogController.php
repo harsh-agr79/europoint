@@ -29,7 +29,7 @@ class BlogController extends Controller
         ->get();
 
         // Manually load recommended posts for each blog
-        $blogs->each ( fn ( $blog ) => $blog->setRelation( 'recommended_posts', $blog->recommended_posts ) );
+        // $blogs->each ( fn ( $blog ) => $blog->setRelation( 'recommended_posts', $blog->recommended_posts ) );
 
         return response()->json( [
             'meta_tags' => MetaTag::where('slug', 'blogs')->first(),
