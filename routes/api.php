@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\FAQController;
 
 
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
@@ -17,6 +18,11 @@ Route::get('/policy', [PolicyController::class, 'policy']);
 Route::get('/terms', [PolicyController::class, 'terms']);
 
 Route::get('/contact', [ContactController::class, 'showContactPage']);
+
+Route::get('/blogs', [BlogController::class, 'blogs']);
+Route::get('/blogs/{slug}', [BlogController::class, 'show']);
+
+Route::get('/faqs', [FAQController::class, 'getFaq']);
 
 Route::middleware(ApiKeyMiddleware::class)->group(function () {
     Route::post('/login', [AuthController::class, 'login']); //
@@ -37,8 +43,7 @@ Route::middleware(ApiKeyMiddleware::class)->group(function () {
         })->middleware('auth:sanctum');
     
 
-    Route::get('/blogs', [BlogController::class, 'blogs']);
-    Route::get('/blogs/{slug}', [BlogController::class, 'show']);
+   
     
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {  
         Route::post('/logout', [AuthController::class, 'logout']);
