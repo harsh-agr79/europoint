@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ContactMessage;
 use App\Models\ContactPage;
 use App\Models\ContactInfo;
+use App\Models\SocialLink;
 
 class ContactController extends Controller
 {
@@ -14,9 +15,12 @@ class ContactController extends Controller
         $contactPage = ContactPage::first();
 
         $contactInfo = ContactInfo::all();
+
+        $socialLinks = SocialLink::all();
         return response()->json([
             'contactPage' => $contactPage,
-            'contactInfo' => $contactInfo
+            'contactInfo' => $contactInfo,
+            'socialLinks' => $socialLinks
         ], 200);
     }
 
