@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\BlogController;
 
 
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
@@ -34,6 +35,10 @@ Route::middleware(ApiKeyMiddleware::class)->group(function () {
     Route::get('/user', function (Request $request) {
             return $request->user();
         })->middleware('auth:sanctum');
+    
+
+    Route::get('/blogs', [BlogController::class, 'blogs']);
+    Route::get('/blogs/{slug}', [BlogController::class, 'show']);
     
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {  
         Route::post('/logout', [AuthController::class, 'logout']);
