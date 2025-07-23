@@ -124,7 +124,7 @@ class AuthController extends Controller
         }
 
         if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+            return response()->json( $validator->errors(), 404 );
         }
 
         try {
