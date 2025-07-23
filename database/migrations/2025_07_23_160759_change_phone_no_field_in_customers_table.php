@@ -12,10 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('customers', function (Blueprint $table) {
-            $table->string('email_enc')->nullable(); // Encrypted email
-            $table->string('token_fp')->nullable(); // Forgot password token
-            $table->timestamp('fp_at')->nullable(); // Forgot password timestamp
-            $table->string('phone_no', 20)->unique()->after('email');
+            $table->string('phone_no', 20)->change();
         });
     }
 
