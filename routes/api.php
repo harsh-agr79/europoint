@@ -8,6 +8,7 @@ use App\Http\Controllers\PolicyController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\AboutController;
 
 
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
@@ -23,6 +24,8 @@ Route::get('/blogs', [BlogController::class, 'blogs']);
 Route::get('/blogs/{slug}', [BlogController::class, 'show']);
 
 Route::get('/faqs', [FAQController::class, 'getFaq']);
+
+Route::get('/about', [AboutController::class, 'getAboutUs']);
 
 Route::middleware(ApiKeyMiddleware::class)->group(function () {
     Route::post('/login', [AuthController::class, 'login']); //
