@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('story_image')->nullable();
             $table->json('values')->nullable();
             $table->json('team')->nullable();
-            $table->text('content');
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }
