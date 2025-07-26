@@ -34,7 +34,7 @@ class AboutResource extends Resource {
         ->schema( [
             TextInput::make( 'meta_title' )->required(),
             TextInput::make( 'meta_description' )->required(),
-            FileUpload::make( 'meta_image' )->required()->image(),
+            FileUpload::make( 'meta_image' )->image(),
 
             TextInput::make( 'hero_title' )->required(),
             Textarea::make( 'hero_description' )->required(),
@@ -83,7 +83,7 @@ class AboutResource extends Resource {
                 'strike',
                 'underline',
                 'undo',
-            ] )->required()->columnSpanFull(),
+            ] )->columnSpanFull(),
         ] );
     }
 
