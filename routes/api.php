@@ -9,6 +9,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\TourController;
 
 
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
@@ -22,6 +23,9 @@ Route::get('/contact', [ContactController::class, 'showContactPage']);
 
 Route::get('/blogs', [BlogController::class, 'blogs']);
 Route::get('/blogs/{slug}', [BlogController::class, 'show']);
+
+Route::get('/tours', [TourController::class, 'getTours']);
+Route::get('/tours/{slug}', [TourController::class, 'getTour']);
 
 Route::get('/faqs', [FAQController::class, 'getFaq']);
 
