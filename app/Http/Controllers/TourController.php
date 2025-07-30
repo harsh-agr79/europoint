@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tour;
+use App\Models\MetaTag;
 
 class TourController extends Controller
 {
@@ -13,7 +14,7 @@ class TourController extends Controller
             ->orderBy('order')
             ->get();
 
-        return response()->json($tours);
+        return response()->json(['tours' => $tours, 'meta_tags' => MetaTag::where('slug', 'tours')->first()]);
     }
 
     public function getTour($slug)
