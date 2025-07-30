@@ -167,7 +167,9 @@ class TourResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->money('EUR', true)
                     ->sortable(),
-                Tables\Columns\TextColumn::make('duration')
+                Tables\Columns\TextColumn::make('days')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('nights')
                     ->sortable(),
                 Tables\Columns\BooleanColumn::make('is_active')
                     ->label('Active')
