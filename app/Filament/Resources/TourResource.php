@@ -40,8 +40,7 @@ class TourResource extends Resource
                     ->unique(Tour::class, 'title', fn ($record) => $record),
                 Forms\Components\TextInput::make('location')
                     ->required(),
-                Forms\Components\Textarea::make('description')
-                    ->required(),
+               
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->required(),
@@ -152,8 +151,23 @@ class TourResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->reorderable('order')
+            ->defaultSort('order', 'asc')
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('location')
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('price')
+                    ->money('EUR', true)
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('duration')
+                    ->sortable(),
+                Tables\Columns\BooleanColumn::make('is_active')
+                    ->label('Active')
+                    ->sortable(),
             ])
             ->filters([
                 //

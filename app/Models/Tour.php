@@ -15,7 +15,6 @@ class Tour extends Model
         'is_active',
         'title',
         'location',
-        'description',
         'price',
         'duration',
         'rating',
