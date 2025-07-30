@@ -44,7 +44,11 @@ class TourResource extends Resource
                 Forms\Components\TextInput::make('price')
                     ->numeric()
                     ->required(),
-                Forms\Components\TextInput::make('duration')
+                Forms\Components\TextInput::make('days')
+                    ->numeric()
+                    ->required(),
+                Forms\Components\TextInput::make('nights')
+                    ->numeric()
                     ->required(),
                 Forms\Components\Textarea::make('description_short'),
                 
