@@ -165,7 +165,7 @@ class TourResource extends Resource
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('price')
-                    ->money('EUR', true)
+                    ->money('NPR', true)
                     ->sortable(),
                 Tables\Columns\TextColumn::make('days')
                     ->sortable(),
