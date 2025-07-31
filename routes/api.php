@@ -58,6 +58,7 @@ Route::middleware(ApiKeyMiddleware::class)->group(function () {
         Route::get('/check-token', [AuthController::class, 'checkToken']);
 
         Route::post('/toggle/wishlist', [WishlistController::class, 'toggleWishlist']);
+        Route::get('/wishlist', [WishlistController::class, 'getWishlist']);
      });
 });
 
