@@ -19,7 +19,9 @@ class WishlistController extends Controller
 
         if ($wishlist) {
             $wishlist->delete();
-            return response()->json(['message' => 'Tour removed from wishlist']);
+            return response()->json(['message' => 'Tour removed from wishlist', 'wishlist' => Wishlist::where('customer_id', $request->user()->id)
+            ->with('tour')
+            ->get()]);
         }
 
         Wishlist::create([
