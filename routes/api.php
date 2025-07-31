@@ -10,6 +10,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\TourController;
+use App\Http\Controllers\WishlistController;
 
 
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
@@ -55,6 +56,8 @@ Route::middleware(ApiKeyMiddleware::class)->group(function () {
     Route::middleware(['auth:sanctum', 'verified'])->group(function () {  
         Route::post('/logout', [AuthController::class, 'logout']);
         Route::get('/check-token', [AuthController::class, 'checkToken']);
+
+        Route::post('/toggle/wishlist', [WishlistController::class, 'toggleWishlist']);
      });
 });
 
