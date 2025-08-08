@@ -107,7 +107,8 @@ class HomePageResource extends Resource
     {
         return $table
             ->columns([
-                //
+                 TextColumn::make('meta_title')->searchable(),
+                TextColumn::make('meta_description')->limit(50),
             ])
             ->filters([
                 //
