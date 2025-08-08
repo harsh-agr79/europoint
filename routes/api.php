@@ -11,6 +11,7 @@ use App\Http\Controllers\FAQController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\TourController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\HomeController;
 
 
 Route::get('/email/verify/{id}/{hash}', [AuthController::class, 'verifyEmail'])
@@ -31,6 +32,8 @@ Route::get('/tours/{slug}', [TourController::class, 'getTour']);
 Route::get('/faqs', [FAQController::class, 'getFaq']);
 
 Route::get('/about', [AboutController::class, 'getAboutUs']);
+
+Route::get('/homepage', [HomeController::class, 'getHomePage']);
 
 Route::middleware(ApiKeyMiddleware::class)->group(function () {
     Route::post('/login', [AuthController::class, 'login']); //
